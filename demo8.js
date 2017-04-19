@@ -15,3 +15,16 @@ http.get(process.argv[2],function(res){
 		console.log(content);
 	})
 })
+
+//使用第三方包来连接stream,eg:bl(Buffer List) | concat-stream
+var http = require('http')
+var bl = require('bl')
+http.get(process.argv[2],function(res){
+	res.pipe(bl(function(err,data){
+		if(err){
+			console.log(err)
+		}
+		console.log(data.toString().length);
+		console.log(data.toString())
+	}))
+})
